@@ -6,6 +6,7 @@ export const Todo: React.FC<TodoProps> = ({
 	id,
 	text,
 	state,
+	timeStamp,
 	deleteTodo,
 	editTodo,
 	complete,
@@ -18,7 +19,10 @@ export const Todo: React.FC<TodoProps> = ({
 					type='checkbox'
 					onChange={() => complete(id)}
 				/>
-				<S.StyledSpan state={state}>{text}</S.StyledSpan>
+				<S.TextContainer style={{ flexDirection: 'column' }}>
+					<S.StyledSpan state={state}>{text}</S.StyledSpan>
+					<S.StyledTimestamp>{timeStamp}</S.StyledTimestamp>
+				</S.TextContainer>
 			</S.TextContainer>
 			<S.ButtonContainer>
 				<ButtonIcon svgName='trash' onClick={() => deleteTodo(id)} />

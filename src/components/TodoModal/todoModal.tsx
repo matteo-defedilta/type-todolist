@@ -6,6 +6,7 @@ type TodoProps = {
 	id: string;
 	text: string;
 	state: 'Complete' | 'Incomplete';
+	timeStamp: string;
 };
 
 type ModalProps = {
@@ -25,6 +26,7 @@ export const TodoModal: React.FC<ModalProps> = ({
 }) => {
 	const [text, setText] = useState('');
 	const [state, setState] = useState<'Incomplete' | 'Complete'>('Incomplete');
+	const [timeStamp, setTimeStamp] = useState('');
 	const [updatingTodo, setUpdatingTodo] = useState<TodoProps>();
 
 	const id = useId();
@@ -37,6 +39,22 @@ export const TodoModal: React.FC<ModalProps> = ({
 			setText(newTodos[0].text);
 		}
 	}, [todoId, todos]);
+
+	const createTimestamp = () => {
+		const currentDate = new Date();
+		const options = {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: true,
+			month: 'numeric',
+			day: 'numeric',
+			year: 'numeric',
+		};
+		const newTimeStamp = new Intl.DateTimeFormat('en-US', options).format(
+			currentDate
+		);
+		return newTimeStamp;
+	};
 
 	return (
 		<S.ModalOverlay onClick={onClose}>
@@ -61,10 +79,12 @@ export const TodoModal: React.FC<ModalProps> = ({
 					usage='primary'
 					label={todoId === '' ? 'Add' : 'Update'}
 					onClick={() => {
+						const timeStamp = createTimestamp();
+						setTimeStamp(timeStamp);
 						if (todoId === '') {
-							onAdd({ id, text, state });
+							onAdd({ id, text, state, timeStamp });
 						} else {
-							onUpdate({ id: updatingTodo?.id || '', text, state });
+							onUpdate({ id: updatingTodo?.id || '', text, state, timeStamp });
 						}
 					}}
 				/>

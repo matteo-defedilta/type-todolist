@@ -19,6 +19,10 @@ export const ButtonContainer = styled.div`
 
 export const TextContainer = styled.div`
 	display: flex;
+	flex-wrap: wrap;
+	input[type='checkbox'] {
+		background-color: red;
+	}
 `;
 
 export const StyledCheckbox = styled.input`
@@ -30,4 +34,11 @@ export const StyledSpan = styled.span`
 	font-weight: 500;
 	text-decoration: ${(props) => props.state == 'Complete' && 'line-through'};
 	color: ${(props) => props.state == 'Complete' && '#585858'};
+`;
+
+export const StyledTimestamp = styled.span`
+	color: #585858;
+	display: block;
+	font-size: 0.8rem;
+	font-weight: 300;
 `;

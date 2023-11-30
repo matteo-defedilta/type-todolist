@@ -11,6 +11,7 @@ type TodoProps = {
 	id: string;
 	text: string;
 	state: 'Complete' | 'Incomplete';
+	timeStamp: string;
 };
 
 type TodosProp = {
